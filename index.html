@@ -1,0 +1,2269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCPERLC Staff Guidelines</title>
+    <style>
+        :root {
+            --primary: #06b6d4;
+            --primary-light: #22d3ee;
+            --bg: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-dark: #1e293b;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;
+            --link: #0891b2;
+            --sidebar-width: 260px;
+            --header-height: 64px;
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --transition-speed: 0.2s;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.08);
+            --color-warning-bg: #fffbeb;
+            --color-warning-border: #f59e0b;
+            --color-info-bg: #ecfdf5;
+            --color-info-border: #10b981;
+            --color-danger-bg: #fef2f2;
+            --color-danger-border: #ef4444;
+            --color-success-bg: #f0fdf4;
+            --color-success-border: #22c55e;
+            --color-table-header: #f1f5f9;
+            --color-code-bg: #1e293b;
+        }
+
+        [data-theme="dark"] {
+            --primary: #9ca3af;
+            --primary-light: #d1d5db;
+            --bg: #1a1a1a;
+            --bg-card: #2a2a2a;
+            --bg-dark: #1a1a1a;
+            --text: #e5e5e5;
+            --text-secondary: #a3a3a3;
+            --text-muted: #737373;
+            --border: #404040;
+            --link: #9ca3af;
+            --color-warning-bg: #2e2618;
+            --color-warning-border: #f59e0b;
+            --color-info-bg: #1a2e1a;
+            --color-info-border: #10b981;
+            --color-danger-bg: #2e1a1a;
+            --color-danger-border: #ef4444;
+            --color-success-bg: #1a2e1a;
+            --color-success-border: #22c55e;
+            --color-table-header: #2a2a2a;
+            --color-code-bg: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 16px;
+        }
+
+        .header-burger {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: 2px solid var(--text-muted);
+            border-radius: 4px;
+            cursor: pointer;
+            color: var(--text-muted);
+            width: 36px;
+            height: 36px;
+            transition: all 0.2s ease;
+        }
+
+        .header-burger:hover {
+            background: var(--text-muted);
+            border-color: var(--text-muted);
+        }
+
+        .header-burger:hover svg {
+            fill: var(--bg);
+        }
+
+        .header-burger svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-muted);
+            transition: fill 0.2s ease;
+            margin-top: 1px;
+        }
+
+        [data-theme="dark"] .header-burger {
+            border-color: #fff;
+            color: #fff;
+        }
+
+        [data-theme="dark"] .header-burger:hover {
+            background: #fff;
+            border-color: #fff;
+        }
+
+        [data-theme="dark"] .header-burger svg {
+            fill: #fff;
+        }
+
+        [data-theme="dark"] .header-burger:hover svg {
+            fill: #1a1a1a;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-main {
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .logo-sub {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .header-actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 0;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+        }
+
+        .header-search {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-search input {
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--bg);
+            color: var(--text);
+            width: 200px;
+            font-size: 14px;
+        }
+
+        .header-search input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            z-index: 950;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .sidebar-section {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-section:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-section-title {
+            padding: 0 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: background var(--transition-speed);
+            cursor: pointer;
+        }
+
+        .sidebar-link:hover {
+            background: var(--bg);
+        }
+
+        .sidebar-link.sub {
+            padding-left: 50px;
+            font-size: 13px;
+        }
+
+        .link-icon {
+            font-size: 16px;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            color: var(--text);
+            font-size: 14px;
+            cursor: pointer;
+            transition: background var(--transition-speed);
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+        }
+
+        .dropdown-toggle:hover {
+            background: var(--bg);
+        }
+
+        .dropdown-arrow {
+            margin-left: auto;
+            font-size: 12px;
+            transition: transform 0.2s;
+        }
+
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .dropdown-content.open {
+            max-height: 500px;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main {
+            margin-left: var(--sidebar-width);
+            margin-top: var(--header-height);
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 40px 80px;
+        }
+
+        /* ===== PAGES ===== */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* ===== BREADCRUMB ===== */
+        .breadcrumb {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb a {
+            color: var(--link);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb .sep {
+            margin: 0 8px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .welcome-banner-img {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            margin-bottom: 24px;
+            object-fit: cover;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            border: 4px solid var(--primary);
+        }
+
+        .hero-badge {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 32px auto;
+            padding: 6px 16px;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin: 32px 0 16px;
+        }
+
+        h3 {
+            font-size: 20px;
+            margin: 24px 0 12px;
+        }
+
+        h4 {
+            font-size: 18px;
+            margin: 20px 0 10px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        /* ===== CARDS ===== */
+        .section-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .section-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .section-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .card-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* ===== CALLOUTS ===== */
+        .callout {
+            padding: 16px;
+            border-radius: var(--radius-md);
+            margin: 20px 0;
+            display: flex;
+            gap: 12px;
+        }
+
+        .callout.warning {
+            background: var(--color-warning-bg);
+            border: 1px solid var(--color-warning-border);
+        }
+
+        .callout.info {
+            background: var(--color-info-bg);
+            border: 1px solid var(--color-info-border);
+        }
+
+        .callout.danger {
+            background: var(--color-danger-bg);
+            border: 1px solid var(--color-danger-border);
+        }
+
+        .callout.success {
+            background: var(--color-success-bg);
+            border: 1px solid var(--color-success-border);
+        }
+
+        .callout-icon {
+            font-size: 20px;
+        }
+
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        /* ===== TABLES ===== */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--color-table-header);
+            font-weight: 600;
+        }
+
+        code {
+            background: var(--color-code-bg);
+            color: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        /* ===== COMMAND BOX ===== */
+        .command-box {
+            background: var(--color-code-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .command-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        .command-box pre {
+            color: #e2e8f0;
+            font-family: monospace;
+            font-size: 14px;
+            margin: 0;
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        /* ===== RANK GRID ===== */
+        .rank-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .rank-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+        }
+
+        .rank-badge {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .rank-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .rank-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* ===== LISTS ===== */
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .header-burger {
+                display: block;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+                box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .content {
+                padding: 24px 20px 60px;
+            }
+
+            .section-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .rank-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-search input {
+                width: 120px;
+            }
+        }
+
+        @media (min-width: 901px) {
+            .header-burger {
+                display: flex;
+            }
+        }
+
+        /* ===== OVERLAY ===== */
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 850;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        /* ===== PROGRESS BAR ===== */
+        .progress-bar {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--border);
+            z-index: 101;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="header-inner">
+            <button class="header-burger" onclick="toggleSidebar()" aria-label="Toggle sidebar">
+                <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+            </button>
+            <a href="#" class="header-logo" onclick="showPage('welcome'); return false;">
+                <img src="scperlc copy.webp" class="logo-icon" alt="SCPERLC" onerror="this.style.display='none'">
+                <div class="logo-text">
+                    <span class="logo-main">Staff Guidelines</span>
+                    <span class="logo-sub">SCP Roleplay</span>
+                </div>
+            </a>
+            <div class="header-actions">
+                <button class="theme-toggle" onclick="toggleTheme()" data-tooltip="Toggle dark mode" aria-label="Toggle theme">
+                    <span id="themeIcon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== SIDEBAR ===== -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Main</div>
+            <a class="sidebar-link" data-page="welcome" onclick="showPage('welcome')">
+                <span class="link-icon">🏠</span> Welcome Page
+            </a>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Moderation Information</div>
+            <a class="sidebar-link" data-page="onduty-protocols" onclick="showPage('onduty-protocols')">
+                <span class="link-icon">📜</span> On-Duty Protocols
+            </a>
+            <a class="sidebar-link" data-page="staff-policy" onclick="showPage('staff-policy')">
+                <span class="link-icon">⚖️</span> Staff Policies
+            </a>
+            <a class="sidebar-link" data-page="punishments" onclick="showPage('punishments')">
+                <span class="link-icon">🚫</span> Punishment Guide
+            </a>
+            <a class="sidebar-link" data-page="commands" onclick="showPage('commands')">
+                <span class="link-icon">📋</span> Command Usage
+            </a>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Roleplay Guidelines</div>
+            
+            <!-- President Roleplay Dropdown -->
+            <button class="dropdown-toggle" onclick="toggleDropdown('president-dropdown')">
+                <span class="link-icon">🎭</span> President Roleplay <span class="dropdown-arrow">▸</span>
+            </button>
+            <div class="dropdown-content" id="president-dropdown">
+                <a class="sidebar-link sub" onclick="showPage('president-rp')">
+                    <span class="link-icon">📖</span> Overview
+                </a>
+                <a class="sidebar-link sub" onclick="showPage('president-roles-tasks')">
+                    <span class="link-icon">👥</span> Roles and Tasks
+                </a>
+                <a class="sidebar-link sub" onclick="showPage('president-procedures')">
+                    <span class="link-icon">📝</span> Procedures
+                </a>
+                <a class="sidebar-link sub" onclick="showPage('president-players-roles')">
+                    <span class="link-icon">🎖️</span> Player Roles
+                </a>
+                <a class="sidebar-link sub" onclick="showPage('president-convoy')">
+                    <span class="link-icon">🚗</span> Convoy Formation
+                </a>
+            </div>
+
+            <!-- SCP Roleplay Dropdown -->
+            <button class="dropdown-toggle" onclick="toggleDropdown('scp-dropdown')">
+                <span class="link-icon">🔬</span> SCP Roleplay <span class="dropdown-arrow">▸</span>
+            </button>
+            <div class="dropdown-content" id="scp-dropdown">
+                <a class="sidebar-link sub" onclick="showPage('scp-roles-tasks')">
+                    <span class="link-icon">👥</span> Roles and Tasks
+                </a>
+                <a class="sidebar-link sub" onclick="showPage('scp-procedures')">
+                    <span class="link-icon">📝</span> Procedures
+                </a>
+                <a class="sidebar-link sub" onclick="showPage('scp-players-roles')">
+                    <span class="link-icon">🎖️</span> Player Roles
+                </a>
+                <a class="sidebar-link sub" onclick="showPage('scp-convoy')">
+                    <span class="link-icon">🚗</span> Convoy Formation
+                </a>
+            </div>
+
+            <!-- Border Roleplay Dropdown -->
+            <button class="dropdown-toggle" onclick="toggleDropdown('border-dropdown')">
+                <span class="link-icon">🚧</span> Border Roleplay <span class="dropdown-arrow">▸</span>
+            </button>
+            <div class="dropdown-content" id="border-dropdown">
+                <a class="sidebar-link sub" onclick="showPage('border-rp')">
+                    <span class="link-icon">📖</span> Overview
+                </a>
+                <a class="sidebar-link sub" onclick="showPage('border-start')">
+                    <span class="link-icon">▶️</span> Start Procedure
+                </a>
+            </div>
+
+            <!-- Zombie Roleplay Dropdown -->
+            <button class="dropdown-toggle" onclick="toggleDropdown('zombie-dropdown')">
+                <span class="link-icon">🧟</span> Zombie Roleplay <span class="dropdown-arrow">▸</span>
+            </button>
+            <div class="dropdown-content" id="zombie-dropdown">
+                <a class="sidebar-link sub" onclick="showPage('zombie-rp')">
+                    <span class="link-icon">📖</span> Overview
+                </a>
+            </div>
+
+            <a class="sidebar-link" data-page="normal-rp" onclick="showPage('normal-rp')">
+                <span class="link-icon">🎮</span> Normal Roleplay
+            </a>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Additional Information</div>
+            <a class="sidebar-link" data-page="chain-of-command" onclick="showPage('chain-of-command')">
+                <span class="link-icon">🏛️</span> Chain of Command
+            </a>
+            <a class="sidebar-link" data-page="staff-awards" onclick="showPage('staff-awards')">
+                <span class="link-icon">🏆</span> Staff Awards
+            </a>
+            <a class="sidebar-link" data-page="arbiter-pass" onclick="showPage('arbiter-pass')">
+                <span class="link-icon">🎫</span> Arbiter Pass
+            </a>
+            <a class="sidebar-link" data-page="important-info" onclick="showPage('important-info')">
+                <span class="link-icon">💡</span> Important Information
+            </a>
+            <a class="sidebar-link" data-page="faq" onclick="showPage('faq')">
+                <span class="link-icon">❓</span> Frequently Asked Questions
+            </a>
+            <a class="sidebar-link" data-page="glossary" onclick="showPage('glossary')">
+                <span class="link-icon">📖</span> Glossary
+            </a>
+            <a class="sidebar-link" data-page="updates" onclick="showPage('updates')">
+                <span class="link-icon">🔄</span> Update Board
+            </a>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Technical Guides</div>
+            <a class="sidebar-link" data-page="melonly" onclick="showPage('melonly')">
+                <span class="link-icon">🔧</span> Melonly Usage
+            </a>
+            <a class="sidebar-link" data-page="roblox-id" onclick="showPage('roblox-id')">
+                <span class="link-icon">🆔</span> Get Roblox ID
+            </a>
+        </div>
+    </nav>
+
+    <!-- ===== OVERLAY (mobile) ===== -->
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main">
+        <div class="content">
+
+            <!-- ===== WELCOME PAGE ===== -->
+            <div class="page active" id="page-welcome">
+                <div class="hero">
+                    <div class="hero-badge">📢 Welcome to the Team</div>
+                    <img src="scperlc copy.webp" class="welcome-banner-img" alt="SCPERLC" onerror="this.style.display='none'">
+                    <h1>Welcome, <span class="gradient-text">Staff Member!</span></h1>
+                    <p class="hero-subtitle">To the <strong style="color:#06b6d4;">SCP Roleplay</strong> Community's Staff Guidelines</p>
+                </div>
+
+                <div class="callout info">
+                    <span class="callout-icon">🩵</span>
+                    <div>
+                        <div class="callout-title">A Warm Welcome</div>
+                        <p>If it's your first time here, <strong style="color:#06b6d4;">congratulations</strong>! 🎊 If it isn't your first time, <strong style="color:#06b6d4;">thank you</strong> for being an amazing staff member in our Community! 🙏</p>
+                    </div>
+                </div>
+
+                <p>This Staff Guidelines document has been carefully created to help you correctly moderate in our community, explain our server's procedures, and provide solutions to any doubts on your moderation experience.</p>
+
+                <p>Here you can find key details about SCP Roleplay, including punishments, roleplay guides, SCP-driven lore RPs, zombie RPs, president/border roleplay, and so much more. 📚</p>
+
+                <p>The Leadership Team thanks you for being a staff member with us, and wish you the best experience among the staff team! ✨</p>
+
+                <h3>🧭 Quick Navigation</h3>
+                <p style="color: var(--text-secondary);">Click any card to jump to that section:</p>
+
+                <div class="section-cards">
+                    <div class="section-card" onclick="showPage('commands')">
+                        <span class="card-icon">📋</span>
+                        <div class="card-title">Moderation Information</div>
+                        <div class="card-desc">Commands, policies, punishments &amp; protocols</div>
+                    </div>
+                    <div class="section-card" onclick="showPage('president-rp')">
+                        <span class="card-icon">🎭</span>
+                        <div class="card-title">Roleplay Guidelines</div>
+                        <div class="card-desc">President, SCP, zombie, border &amp; normal RP</div>
+                    </div>
+                    <div class="section-card" onclick="showPage('chain-of-command')">
+                        <span class="card-icon">🏛️</span>
+                        <div class="card-title">Additional Information</div>
+                        <div class="card-desc">Chain of command, FAQ, glossary &amp; more</div>
+                    </div>
+                    <div class="section-card" onclick="showPage('melonly')">
+                        <span class="card-icon">🔧</span>
+                        <div class="card-title">Technical Guides</div>
+                        <div class="card-desc">Melonly usage &amp; getting Roblox IDs</div>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <p>The official staff handbook for SCPERLC.</p>
+                </div>
+            </div>
+
+            <!-- ===== COMMAND USAGE ===== -->
+            <div class="page" id="page-commands">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Moderation Information <span class="sep">/</span> Command Usage</div>
+                <h1>Command Usage</h1>
+
+                <div class="callout warning">
+                    <span class="callout-icon">⚠️</span>
+                    <div>
+                        <div class="callout-title">Important for New Staff</div>
+                        <p><strong>Please read this page and others carefully</strong> — you will be quizzed on them!</p>
+                    </div>
+                </div>
+
+                <h2>Command Letter Requirements</h2>
+                <p>Commands in the game are prefixed with <code>:</code> (colon). The number of letters after the colon determines the rank required to use the command.</p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>3+ Letters</th><th>4+ Letters</th><th>Half Username</th><th>Full Username</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>:to</code></td><td><code>:bring</code></td><td><code>:kick</code></td><td><code>:ban</code></td></tr>
+                            <tr><td><code>:view</code></td><td><code>:kill</code></td><td><code>:mod</code></td><td><code>:unmod</code></td></tr>
+                            <tr><td></td><td><code>:down</code></td><td><code>:admin</code></td><td><code>:unadmin</code></td></tr>
+                            <tr><td></td><td><code>:tp</code></td><td><code>:helper</code></td><td></td></tr>
+                            <tr><td></td><td><code>:refresh</code></td><td><code>:unhelper</code></td><td></td></tr>
+                            <tr><td></td><td><code>:heal</code></td><td></td><td></td></tr>
+                            <tr><td></td><td><code>:wanted</code></td><td></td><td></td></tr>
+                            <tr><td></td><td><code>:unwanted</code></td><td></td><td></td></tr>
+                            <tr><td></td><td><code>:jail</code></td><td></td><td></td></tr>
+                            <tr><td></td><td><code>:respawn</code></td><td></td><td></td></tr>
+                            <tr><td></td><td><code>:load</code></td><td></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout danger">
+                    <span class="callout-icon">⛔</span>
+                    <div>
+                        <div class="callout-title">CRITICAL — DO NOT USE</div>
+                        <p><strong>DO NOT USE COMMANDS THAT TARGET "ALL" OR "OTHERS".</strong> Staff must be aware that player usernames can actually include the words "all" or "others" (e.g., a player could be named "all", "others", "allies", "otherside", etc.). Using a command that targets all or others could accidentally target real players whose names contain those words, resulting in unintended bans, kicks, or other punishments. Always target specific usernames instead.</p>
+                    </div>
+                </div>
+
+                <h3>Command Categories</h3>
+                <h4>Movement Commands</h4>
+                <ul>
+                    <li><code>:to</code> — Teleport to a player</li>
+                    <li><code>:tp</code> — Teleport to a location</li>
+                    <li><code>:bring</code> — Bring a player to you</li>
+                    <li><code>:load</code> — Load a player's character</li>
+                </ul>
+                <h4>Moderation Commands</h4>
+                <ul>
+                    <li><code>:kick</code> — Kick a player from the server</li>
+                    <li><code>:ban</code> — Ban a player permanently</li>
+                    <li><code>:mod</code> — Promote a player to moderator</li>
+                    <li><code>:unmod</code> — Remove moderator status</li>
+                    <li><code>:admin</code> — Promote to admin</li>
+                    <li><code>:unadmin</code> — Remove admin status</li>
+                    <li><code>:helper</code> — Promote to helper</li>
+                    <li><code>:unhelper</code> — Remove helper status</li>
+                </ul>
+                <h4>Gameplay Commands</h4>
+                <ul>
+                    <li><code>:kill</code> — Kill a player</li>
+                    <li><code>:heal</code> — Heal a player</li>
+                    <li><code>:refresh</code> — Refresh a player's character</li>
+                    <li><code>:respawn</code> — Respawn a player</li>
+                    <li><code>:down</code> — Down a player</li>
+                    <li><code>:wanted</code> — Mark player as wanted</li>
+                    <li><code>:unwanted</code> — Clear wanted status</li>
+                    <li><code>:jail</code> — Jail a player</li>
+                    <li><code>:view</code> — Spectate a player</li>
+                </ul>
+            </div>
+
+            <!-- ===== ON-DUTY PROTOCOLS ===== -->
+            <div class="page" id="page-onduty-protocols">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Moderation Information <span class="sep">/</span> On-Duty Protocols</div>
+                <h1>On-Duty Protocols</h1>
+
+                <h2>Banned Roleplay</h2>
+                <div class="callout danger">
+                    <span class="callout-icon">⚠️</span>
+                    <div>
+                        <div class="callout-title">Banned Roleplay</div>
+                        <p>We ask you to moderate any Roleplay against the Roblox Platform's Terms of Service as specified in the <a href="#" onclick="showPage('punishments')">Punishments section</a> of this guide.</p>
+                    </div>
+                </div>
+
+                <h3>Examples of Banned Roleplay</h3>
+                <ul>
+                    <li><strong>Bomb Roleplay</strong> — Simulating bomb threats or explosive-related scenarios</li>
+                    <li><strong>Torture Roleplay</strong> — Any form of torture or severe abuse RP</li>
+                    <li><strong>NSFW Roleplay</strong> — Not Safe For Work content</li>
+                    <li><strong>Extremism</strong> — Recreating tragic real-world events (e.g., 9/11)</li>
+                    <li><strong>Racist Roleplay</strong> — Racist behavior or language</li>
+                </ul>
+
+                <h2>General On-Duty Guidelines</h2>
+                <ul>
+                    <li>Always maintain professionalism while on duty</li>
+                    <li>Follow the chain of command at all times</li>
+                    <li>Document all moderation actions taken</li>
+                    <li>Be fair and consistent with punishments</li>
+                    <li>Do not abuse your commands or powers</li>
+                </ul>
+            </div>
+
+            <!-- ===== STAFF POLICIES ===== -->
+            <div class="page" id="page-staff-policy">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Moderation Information <span class="sep">/</span> Staff Policies</div>
+                <h1>Staff Policies</h1>
+
+                <div class="callout info">
+                    <span class="callout-icon">ℹ️</span>
+                    <div>
+                        <div class="callout-title">Core Rules</div>
+                        <p>These are the core rules of Staff. Please read them slowly and carefully, as they include some of the most important rules. Breach of conduct won't be taken lightly and may result in harsh punishments.</p>
+                    </div>
+                </div>
+
+                <h2>Staff Code of Conduct</h2>
+                <h3>1. Professionalism</h3>
+                <p>All staff members are expected to conduct themselves professionally at all times, both in-game and out-of-game. This includes using appropriate language, respecting all community members, and not engaging in personal conflicts while on duty.</p>
+                <h3>2. Fairness</h3>
+                <p>Punishments must be applied consistently and fairly. Do not show favoritism to any player, including friends or people you know outside the game.</p>
+                <h3>3. Transparency</h3>
+                <p>Always provide a reason when issuing a punishment. Players have the right to know why they were punished.</p>
+                <h3>4. No Command Abuse</h3>
+                <p>Using moderation commands for personal gain, harassment, or entertainment is strictly prohibited and will result in severe consequences.</p>
+                <h3>5. Chain of Command</h3>
+                <p>Always respect the hierarchy. Report issues to your superiors and follow their instructions.</p>
+                <h3>6. Confidentiality</h3>
+                <p>Do not share sensitive staff information, internal discussions, or punishment records with players or the general public.</p>
+            </div>
+
+            <!-- ===== PUNISHMENT GUIDE ===== -->
+            <div class="page" id="page-punishments">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Moderation Information <span class="sep">/</span> Punishment Guide</div>
+                <h1>Punishment Guide</h1>
+
+                <div class="callout warning">
+                    <span class="callout-icon">⚠️</span>
+                    <div>
+                        <div class="callout-title">Important</div>
+                        <p>These are the punishments that you should apply when moderating in-game. <strong>Please do not invent punishments</strong> and look at this guide each time you need to.</p>
+                    </div>
+                </div>
+
+                <h2>Extreme Offences</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Offence</th><th>First Offence</th><th>Second Offence</th><th>Third Offence</th><th>Examples</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Exploiting</strong></td><td>180 Day Ban</td><td>Permanent Ban</td><td>Permanent Ban</td><td>Hacking, flying, flinging</td></tr>
+                            <tr><td><strong>Extremism</strong></td><td>14 Day Ban</td><td>30 Day Ban</td><td>60 Day Ban</td><td>Recreating tragic events like 9/11 etc</td></tr>
+                            <tr><td><strong>Racism</strong></td><td>14 Day Ban</td><td>60 Day Ban</td><td>180 Day Ban</td><td>Racist behaviour, usage of the N word</td></tr>
+                            <tr><td><strong>NSFW Actions</strong></td><td>14 Day Ban</td><td>30 Day Ban</td><td>60 Day Ban</td><td>Ro bang, NSFW roleplay like words</td></tr>
+                            <tr><td><strong>Using An Alt Account</strong></td><td>14 Day Ban</td><td>30 Day Ban</td><td>60 Day Ban</td><td>Using another account</td></tr>
+                            <tr><td><strong>Max Punishments</strong></td><td>10 Day Ban</td><td>30 Day Ban</td><td>60 Day Ban</td><td>10+ Punishments</td></tr>
+                            <tr><td><strong>Banned Roleplay</strong></td><td>7 Day Ban</td><td>14 Day Ban</td><td>30 Day Ban</td><td>Bomb Roleplay, torture roleplay etc</td></tr>
+                            <tr><td><strong>Joining Before Kick Timer Ends</strong></td><td>5 Days Ban</td><td>10 Day Ban</td><td>30 Day Ban</td><td>Rejoining before kick timer ends</td></tr>
+                            <tr><td><strong>Bypassing</strong></td><td>5 Day Ban</td><td>10 Day Ban</td><td>30 Day Ban</td><td>Bypassing words like "STFU" "SYBAU"</td></tr>
+                            <tr><td><strong>Leaving To Avoid Punishment</strong></td><td>5 Day Ban</td><td>14 Day Ban</td><td>30 Day Ban</td><td>Leaving server to avoid punishment</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Lesser Offences</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Offence</th><th>First Offence</th><th>Second Offence</th><th>Third Offence</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>RDM (Random Death Match)</strong></td><td>Warning</td><td>Kick</td><td>Kick</td></tr>
+                            <tr><td><strong>VDM (Vehicle Death Match)</strong></td><td>Warning</td><td>Kick</td><td>Kick</td></tr>
+                            <tr><td><strong>Fail RP (FRP)</strong></td><td>Warning</td><td>Kick</td><td>Kick</td></tr>
+                            <tr><td><strong>NITRP (No Intent to Roleplay)</strong></td><td>Warning</td><td>Warning</td><td>Kick</td></tr>
+                            <tr><td><strong>Breaking Character</strong></td><td>Warning</td><td>Kick</td><td>Kick</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ===== PRESIDENT ROLEPLAY ===== -->
+            <div class="page" id="page-president-rp">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Roleplay Guidelines <span class="sep">/</span> President Roleplay</div>
+                <h1>President Roleplay</h1>
+
+                <div class="callout info">
+                    <span class="callout-icon">ℹ️</span>
+                    <div>
+                        <div class="callout-title">What is President Roleplay?</div>
+                        <p><strong>President Roleplay</strong> is the main roleplay type on our server, simulating the role of the President of the United States. It involves managing the President's schedule, protecting them, and ensuring a realistic and engaging experience for all participants.</p>
+                    </div>
+                </div>
+
+                <h2>About This Guide</h2>
+                <p>This guide is divided into <strong>smaller pages</strong> for better readability. You can <strong>always come back to check something</strong>, even while hosting the roleplay!</p>
+
+                <div class="callout info">
+                    <span class="callout-icon">💡</span>
+                    <div>
+                        <div class="callout-title">Tip</div>
+                        <p>The most important thing is that you <strong>know how to do what you're asked to do in-game</strong>. Don't worry if everything doesn't click right away — you can always reference this guide during hosting.</p>
+                    </div>
+                </div>
+
+                <h2>Quick Navigation</h2>
+                <ul>
+                    <li><a href="#" onclick="showPage('president-rp')">Overview</a> — General information about President RP</li>
+                    <li><a href="#" onclick="showPage('president-roles-tasks')">Roles and Tasks</a> — Staff roles and responsibilities</li>
+                    <li><a href="#" onclick="showPage('president-procedures')">Procedures</a> — Step-by-step procedures for hosting</li>
+                    <li><a href="#" onclick="showPage('president-players-roles')">Player Roles</a> — Player role subdivision</li>
+                    <li><a href="#" onclick="showPage('president-convoy')">Convoy Formation</a> — Convoy rules and procedures</li>
+                </ul>
+
+                <h2>Key Elements</h2>
+                <ul>
+                    <li><strong>Presidential Schedule</strong> — Managing the President's daily activities and movements</li>
+                    <li><strong>Security</strong> — Protecting the President from threats</li>
+                    <li><strong>Convoy</strong> — Organized vehicle movement with the President</li>
+                    <li><strong>Public Engagement</strong> — Interacting with citizens and managing public relations</li>
+                    <li><strong>Emergency Response</strong> — Handling crises and emergencies</li>
+                </ul>
+            </div>
+
+            <!-- ===== PRESIDENT ROLES AND TASKS ===== -->
+            <div class="page" id="page-president-roles-tasks">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Roleplay Guidelines <span class="sep">/</span> President Roleplay <span class="sep">/</span> Roles and Tasks</div>
+                <h1>President Roleplay — Roles and Tasks</h1>
+
+                <div class="callout info">
+                    <div>
+                        <div class="callout-title">Role Subdivision</div>
+                        <p>To ensure an organized hosting of the President RP, our server adopts a role subdivision for our on-duty staff members. To host a President RP, at least 2 (advised 3) staff members must be on-duty, and 10 (advised 15) players must be online.</p>
+                    </div>
+                </div>
+
+                <h2>Role Assignment</h2>
+                <p>Roles can be assigned in two ways:</p>
+                <ol>
+                    <li><strong>Designated by High Ranking staff</strong> — Decided by an HR+ staff member, or a Middle Ranking staff member delegated by HR+</li>
+                    <li><strong>Automatic assignment</strong> — The highest on-duty rank below HR ranks becomes the host; Trial Moderators cannot be hosts</li>
+                </ol>
+
+                <h2>Staff Roles</h2>
+                <h3>The Host and Co-Host</h3>
+                <ul>
+                    <li>Supervise and manage all aspects of the President RP</li>
+                    <li>Manage staff-player communications about the RP</li>
+                    <li>Make frequent announcements about the RP situation</li>
+                    <li>Check that everyone is following the rules</li>
+                    <li>Coordinate RP procedures and make decisions</li>
+                    <li>Lead the convoy and choose its route</li>
+                    <li>Confirm or invalidate kills of the President</li>
+                    <li>Handle President replacement if they go offline</li>
+                </ul>
+
+                <h3>The Supporters</h3>
+                <ul>
+                    <li>Complete side-tasks assigned by the host/co-host</li>
+                    <li>Answer players' questions about the RP</li>
+                    <li>Monitor the President for any kills</li>
+                    <li>Help decide whether kills are valid</li>
+                    <li>Assist with convoy formation if asked</li>
+                </ul>
+
+                <h3>The Moderation Subdivision</h3>
+                <ul>
+                    <li>Respond to mod calls</li>
+                    <li>Answer players' questions on any matter</li>
+                    <li>Patrol to check cars are parked correctly</li>
+                    <li>Ensure players are following server rules</li>
+                    <li>Follow orders from HR+ staff members</li>
+                    <li>Supervise Whitelisted RPs if asked</li>
+                    <li>Ensure players are wearing realistic avatars</li>
+                </ul>
+            </div>
+
+            <!-- ===== PRESIDENT PROCEDURES ===== -->
+            <div class="page" id="page-president-procedures">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Roleplay Guidelines <span class="sep">/</span> President Roleplay <span class="sep">/</span> Procedures</div>
+                <h1>President Roleplay — Procedures</h1>
+
+                <div class="callout info">
+                    <div>
+                        <div class="callout-title">Remember!</div>
+                        <p>You can click on the appropriate button on commands boxes to instantly copy them and paste them in-game!</p>
+                    </div>
+                </div>
+
+                <h2>Locations</h2>
+                <p>The President can go everywhere he decides, but cannot go to:</p>
+                <ul>
+                    <li>Any safe zone</li>
+                    <li>Police Department, Fire Department, Sheriff's Office</li>
+                    <li>Gun Store, Prison, Any Garage</li>
+                    <li>High Rock Park watchtower, Farm silo, Civilian spawn points</li>
+                </ul>
+                <p>The President must stay in a location for at least 5 minutes and should change every 15 minutes. The first location must always be the White House (Hospital).</p>
+
+                <h2>Changing Location</h2>
+                <p>When the President asks to change location, ensure he has passed at least 5 minutes in the current location and that the location is not banned. Set up a peace timer of 500 seconds:</p>
+                <div class="command-box">
+                    <div class="command-label">Peacetimer</div>
+                    <pre>:pt 500</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':pt 500')">Copy</button>
+                </div>
+                <p>Then announce:</p>
+                <div class="command-box">
+                    <div class="command-label">Location Announcement</div>
+                    <pre>:h The President is now going to [location]. Please form a convoy outside [your current location].</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':h The President is now going to [location]. Please form a convoy outside [your current location].')">Copy</button>
+                </div>
+
+                <h2>When the President Dies</h2>
+                <p>Each President has 3 lives. When he dies, he loses 1 life. Announce the death:</p>
+                <div class="command-box">
+                    <div class="command-label">Death Announcement</div>
+                    <pre>:h The President [username] has died. He has now [remaining lives]/3 lives remaining!</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':h The President [username] has died. He has now [remaining lives]/3 lives remaining!')">Copy</button>
+                </div>
+                <p>Then revive the President:</p>
+                <div class="command-box">
+                    <div class="command-label">Revive</div>
+                    <pre>:heal [username]</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':heal [username]')">Copy</button>
+                </div>
+                <p>Set up a 60-second peace timer:</p>
+                <div class="command-box">
+                    <div class="command-label">Organize Peace Timer</div>
+                    <pre>:pt 60</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':pt 60')">Copy</button>
+                </div>
+
+                <h2>Emergency Escape</h2>
+                <p>The President can emergency-escape with Host approval:</p>
+                <div class="command-box">
+                    <div class="command-label">Escape Announcement</div>
+                    <pre>:h The President is making an emergency escape!</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':h The President is making an emergency escape!')">Copy</button>
+                </div>
+                <div class="command-box">
+                    <div class="command-label">Arrival Announcement</div>
+                    <pre>:h The President has made an emergency escape and is now at [Location].</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':h The President has made an emergency escape and is now at [Location].')">Copy</button>
+                </div>
+            </div>
+
+            <!-- ===== PRESIDENT PLAYER ROLES ===== -->
+            <div class="page" id="page-president-players-roles">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Roleplay Guidelines <span class="sep">/</span> President Roleplay <span class="sep">/</span> Player Roles</div>
+                <h1>President Roleplay — Player Roles</h1>
+
+                <h2>Player Role Subdivision</h2>
+                <p>Players in President RP divide into the following roles:</p>
+                <ul>
+                    <li><strong>The President</strong> — The main character, has 3 lives, decides where to go and what to do</li>
+                    <li><strong>The Vice-President</strong> — Second-most elected, serves as replacement if President goes offline</li>
+                    <li><strong>The Guards</strong> — Players who spontaneously decide to protect the President</li>
+                    <li><strong>The LEOs</strong> — Police Officers, Sheriffs, EMS, Fire Department, DOT</li>
+                    <li><strong>The Civilians</strong> — Everyone else, may spectate or try to kill the President</li>
+                </ul>
+
+                <h2>The President</h2>
+                <p>The President is the main character of this Roleplay type. This role is the representation of the real-life "President of the United States of America". The President is elected through elections by the players. The President has 3 lives, meaning he can be killed only 3 times in 1 RP. The RP revolves around the President.</p>
+
+                <h2>The Vice-President</h2>
+                <p>The Vice-President is the second-most elected candidate at the elections. He later serves as the replacement for an unavailable President. In this RP, the Vice-President has no power on anything, nor can decide what to do and where to go. He can only decide to remain and follow the President in his moves, or play as a normal player until it's his turn to become President.</p>
+
+                <h2>The Guards</h2>
+                <p>The Guards are a small group of players who spontaneously decide to become the personal Guards of the President. These are not regulated by the staff of the server, as their job is spontaneous and they can decide what to do at any time. A President can also have no Guards at all.</p>
+
+                <h2>The LEOs</h2>
+                <p>LEO stands for Low Enforcement Officer. This is the group that represents Police Officers and Sheriffs Officers (people who enforce the law), and sometimes also include EMS and Fire Department people. Police Officers and Sheriffs Officers are able to participate in the RP as they want and if they want. EMS and Fire Department serve their normal role of extinguishing fires and healing people. DOT members can participate and are welcome to set up the convoy's path barriers.</p>
+
+                <h2>The Civilians</h2>
+                <p>The civilians are the remaining people who choose not to play as LEO or don't become President/Vice-President. Civilians may choose to do one of two things: attack the President, or roleplay peacefully. Everyone can switch between roles as many times as they want and whenever they want during the RP, apart from the elected roles which are the President and Vice-President.</p>
+            </div>
+
+            <!-- ===== PRESIDENT CONVOY ===== -->
+            <div class="page" id="page-president-convoy">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Roleplay Guidelines <span class="sep">/</span> President Roleplay <span class="sep">/</span> Convoy Formation</div>
+                <h1>President Roleplay — Convoy Formation</h1>
+
+                <h2>Convoy Rules and Constraints</h2>
+                <p>A convoy must:</p>
+                <ul>
+                    <li>Not have more than 8 non-staff vehicles (usually)</li>
+                    <li>Have a maximum of 2 limousines, one which carries both the President and Vice-President, the other being the decoy</li>
+                    <li>Have a maximum of 2 staff vehicles, one at the very front, and the other at the very back</li>
+                    <li>Not have any civilians in the convoy</li>
+                    <li>Be composed of only blacked out vehicles, meaning that all vehicles must have a black livery without any writing on them (an exception is made for Whitelisted Departments vehicles)</li>
+                </ul>
+
+                <h2>During Travel</h2>
+                <ul>
+                    <li>No overtaking unless the vehicle in front is stuck, AFK, or if a staff member gives permission</li>
+                    <li>No sirens, honking, or ramming into other vehicles</li>
+                    <li>All convoy roads must be fully blocked to prevent any external disturbance</li>
+                    <li>No civilian should drive in or around the convoy</li>
+                    <li>Maintain a speed between 15-30 mph, or 15-30 Km/h</li>
+                </ul>
+
+                <h2>Convoy Procedures</h2>
+                <p>During a convoy you should always make sure that a Peace Timer is active to prevent anyone from shooting at the convoy:</p>
+                <div class="command-box">
+                    <div class="command-label">Active Peace Timer</div>
+                    <pre>:pt 500</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':pt 500')">Copy</button>
+                </div>
+                <p>The President cannot be killed during a convoy. If the President's vehicle decides to drive off and away without staff consent, the President can then be killed, but you must stop the convoy immediately and teleport to his vehicle to get him back on track.</p>
+            </div>
+
+            <!-- ===== SCP ROLES AND TASKS ===== -->
+            <div class="page" id="page-scp-roles-tasks">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Roleplay Guidelines <span class="sep">/</span> SCP Roleplay <span class="sep">/</span> Roles and Tasks</div>
+                <h1>SCP Roleplay — Roles and Tasks</h1>
+
+                <div class="callout info">
+                    <div>
+                        <div class="callout-title">Role Subdivision</div>
+                        <p>To ensure an organized hosting of the SCP RP, our server adopts a role subdivision for our on-duty staff members. To host an SCP RP, at least 2 (advised 3) staff members must be on-duty, and 10 (advised 15) players must be online.</p>
+                    </div>
+                </div>
+
+                <h2>Staff Roles</h2>
+                <h3>The Host and Co-Host</h3>
+                <ul>
+                    <li>Supervise and manage all aspects of the SCP RP</li>
+                    <li>Manage staff-player communications about the RP</li>
+                    <li>Make frequent announcements about the RP situation</li>
+                    <li>Check that everyone is following the rules</li>
+                    <li>Coordinate RP procedures and make decisions</li>
+                    <li>Lead the convoy and choose its route</li>
+                    <li>Handle site breach procedures if applicable</li>
+                </ul>
+
+                <h3>The Supporters</h3>
+                <ul>
+                    <li>Complete side-tasks assigned by the host/co-host</li>
+                    <li>Answer players' questions about the RP</li>
+                    <li>Monitor SCP containment status</li>
+                    <li>Assist with convoy formation if asked</li>
+                </ul>
+
+                <h3>The Moderation Subdivision</h3>
+                <ul>
+                    <li>Respond to mod calls</li>
+                    <li>Answer players' questions on any matter</li>
+                    <li>Patrol to check cars are parked correctly</li>
+                    <li>Ensure players are following server rules</li>
+                    <li>Follow orders from HR+ staff members</li>
+                    <li>Supervise Whitelisted RPs if asked</li>
+                    <li>Ensure players are wearing realistic avatars</li>
+                </ul>
+            </div>
+
+            <!-- ===== SCP PROCEDURES ===== -->
+            <div class="page" id="page-scp-procedures">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Roleplay Guidelines <span class="sep">/</span> SCP Roleplay <span class="sep">/</span> Procedures</div>
+                <h1>SCP Roleplay — Procedures</h1>
+
+                <div class="callout info">
+                    <div>
+                        <div class="callout-title">Remember!</div>
+                        <p>You can click on the appropriate button on commands boxes to instantly copy them and paste them in-game!</p>
+                    </div>
+                </div>
+
+                <h2>SCP Setup</h2>
+                <p><strong>Recommended Staff/Volunteer Count:</strong> SCP Roleplay works best with <strong>3–5+ staff members or volunteers</strong> to ensure proper coverage and engagement.</p>
+                <p><strong>Avatar Requirements:</strong> All participating staff and volunteers must have <strong>avatar setups that relate to SCP themes</strong> (e.g., Foundation uniforms, MTF gear, civilian clothing appropriate to the scenario).</p>
+                <p>Before starting the roleplay, you need to <strong>find either a staff member or volunteer</strong> who will go on the <strong>civilian team</strong> and <strong>acquire a weapon of some sort</strong>. This person will serve as the target for the scenario.</p>
+                <p>Once the convoy is prepared, you may start the journey to one of the <strong>approved locations</strong> (Hospital, Barns, County Jail, Mansion at 601, or Airport).</p>
+                <p>For the Hospital location, pull all the way in front of the main entrance past the overpass hang.</p>
+                <p>The appropriate teams should start securing the site as of this time. If applicable, MTFs and their corresponding departments should be guarding SCPs inside the facility— preventing them from escaping.</p>
+                <p><strong>Civilian Placement:</strong> All civilians should <strong>remain inside of the location</strong> during the roleplay.</p>
+                <p><strong>MTF/Foundation Grouping:</strong> Group all MTFs and foundation personnel <strong>together outside</strong> the facility to maintain a visible security presence and coordinate response efforts.</p>
+                <p><strong>Breach and Clear:</strong> Once the convoy is prepared and all teams are in position, the <strong>Foundation and MTF will breach into the location</strong> and <strong>eliminate all threats</strong> to secure the area and complete the scenario objectives.</p>
+
+                <h2>Command — Request Black/SCP Livery</h2>
+                <div class="command-box">
+                    <div class="command-label">PM Command</div>
+                    <pre>:pm [user] Please equip a black/SCP-themed livery or be moderated.</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':pm [user] Please equip a black/SCP-themed livery or be moderated.')">Copy</button>
+                </div>
+
+                <h2>Announcement — Form Convoy</h2>
+                <div class="command-box">
+                    <div class="command-label">Announcement</div>
+                    <pre>:h Create a neat SCP convoy outside of the Police Station!</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':h Create a neat SCP convoy outside of the Police Station!')">Copy</button>
+                </div>
+
+                <h2>Peacetimer — Prevent Random Shootout</h2>
+                <div class="command-box">
+                    <div class="command-label">Peacetimer</div>
+                    <pre>:PT 120-750</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':PT 120-750')">Copy</button>
+                </div>
+
+                <h2>Announcement — Clear Civilians</h2>
+                <div class="command-box">
+                    <div class="command-label">Announcement</div>
+                    <pre>:h Civilians must leave the current area now or be moderated!</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':h Civilians must leave the current area now or be moderated!')">Copy</button>
+                </div>
+
+                <h2>Site Lockdown Announcements</h2>
+                <div class="command-box">
+                    <div class="command-label">Site Lockdown Warning</div>
+                    <pre>:h - - - Warning: SITE-61 is under FULL SITE LOCKDOWN. - - -</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':h - - - Warning: SITE-61 is under FULL SITE LOCKDOWN. - - -')">Copy</button>
+                </div>
+                <div class="command-box">
+                    <div class="command-label">Department Report</div>
+                    <pre>:h All medical, fire, science, report to designated evacuation/lockdown zones.</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':h All medical, fire, science, report to designated evacuation/lockdown zones.')">Copy</button>
+                </div>
+                <div class="command-box">
+                    <div class="command-label">Security Report</div>
+                    <pre>:h All security, report to SECTOR A, B. Containment breach.</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':h All security, report to SECTOR A, B. Containment breach.')">Copy</button>
+                </div>
+                <div class="command-box">
+                    <div class="command-label">MTF Entry</div>
+                    <pre>:h MTF- designation [. . .] has entered the site. All non-combatant units are to report to their evacuation zone immediately.</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':h MTF- designation [. . .] has entered the site. All non-combatant units are to report to their evacuation zone immediately.')">Copy</button>
+                </div>
+                <div class="command-box">
+                    <div class="command-label">Lockdown Lifted</div>
+                    <pre>:h The site lockdown has been lifted. Return to normal operations.</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':h The site lockdown has been lifted. Return to normal operations.')">Copy</button>
+                </div>
+            </div>
+
+            <!-- ===== SCP PLAYER ROLES ===== -->
+            <div class="page" id="page-scp-players-roles">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Roleplay Guidelines <span class="sep">/</span> SCP Roleplay <span class="sep">/</span> Player Roles</div>
+                <h1>SCP Roleplay — Player Roles</h1>
+
+                <h2>Player Role Subdivision</h2>
+                <p>Players in SCP RP divide into the following roles:</p>
+                <ul>
+                    <li><strong>The Foundation</strong> — Includes Security Department, Scientific Department, Medical/Fire Suppression, Mobile Task Forces</li>
+                    <li><strong>Whitelisted Teams</strong> — Includes MTF Alpha-9, Chaos Insurgency, Global Occult Coalition</li>
+                    <li><strong>The Civilians</strong> — May attack the foundation site, or may roleplay peacefully</li>
+                </ul>
+
+                <h2>The Foundation</h2>
+                <p><strong>Security Department</strong> — Responsible for protecting the majority of the foundation and are the "first responders" in responding to any disturbances internally and externally of the site.</p>
+                <p><strong>Scientific Department</strong> — Responsible for performing "safe-controlled" scientific tests on "civilians"/AKA D-class. They consist of researchers, scientists, etc.</p>
+                <p><strong>Medical Department/Fire Suppression Department</strong> — Responsible for the technical fire-medical related safety of the site. They help to assist with standard fires, injured people, and to contain basic medical/fire related issues.</p>
+                <p><strong>Mobile Task Force | [MTF]</strong> — Consists of highly specialized small teams— usually considered as special forces. They help deal with stronger threats that require expertise and greater help. They assist the Security-Department in containment and site-lockdown operations.</p>
+                <ul>
+                    <li>MTF NU-7 (Mobile Task Force NU-7) — Armed with heavy machinery and equipment, matching that of a small army in real life.</li>
+                    <li>MTF BETA-7 (Mobile Task Force BETA-7) — Specialized in containment of biohazardous breaches.</li>
+                    <li>MTF NTF-11 (Mobile Task Force Nine-Tailed-Fox[s]) — Specialized in containment of most SCPs.</li>
+                    <li>MTF Alpha-01 (Mobile Task Force ALPHA-1) — Specialized team— responsible for securing O5 council during a site breach/other purposes.</li>
+                    <li>[WL] MTF ALPHA-09 (Mobile Task Force ALPHA-9) — Designation, "Last Hope." This is the best of the best in the entire SCP Foundation. They utilize SCPs in the containment of others. They are truly the Last Hope.</li>
+                </ul>
+
+                <h2>Whitelisted Teams</h2>
+                <p><strong>[WL] CI (Chaos Insurgency)</strong> — The CI used to be a specialized team— given the same duty as ALPHA-1. They however— opposed the Foundation's interests. <span style="color: #ef4444;">Hostile to Foundation</span></p>
+                <p><strong>[WL] GOC (Global Occult Coalition)</strong> — This is a fictional neutral based team. Similar to how NATO and the UN works. They believe that all SCPs should be destroyed for the safety of humanity. Even if that means destroying the Foundation. <span style="color: #ef4444;">Hostile to Foundation</span></p>
+
+                <h2>The Civilians</h2>
+                <p>Civilians may choose to do one of two things: attack the foundation site, or they may roleplay peacefully.</p>
+            </div>
+
+            <!-- ===== SCP CONVOY ===== -->
+            <div class="page" id="page-scp-convoy">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Roleplay Guidelines <span class="sep">/</span> SCP Roleplay <span class="sep">/</span> Convoy Formation</div>
+                <h1>SCP Roleplay — Convoy Formation</h1>
+
+                <h2>Convoy Rules and Constraints</h2>
+                <p>A convoy must:</p>
+                <ul>
+                    <li>Not have more than 12 non-staff vehicles (usually)</li>
+                    <li>Have a maximum of 2 limousines, one which carries both the President and Vice-President, the other being the decoy</li>
+                    <li>Have a maximum of 2 staff vehicles, one at the very front, and the other at the very back</li>
+                    <li>Not have any civilians in the convoy</li>
+                    <li>Be composed of only blacked out vehicles, meaning that all vehicles must have a black livery without any writing on them (an exception is made for Whitelisted Departments vehicles)</li>
+                </ul>
+
+                <h2>During Travel</h2>
+                <ul>
+                    <li>No overtaking unless the vehicle in front is stuck, AFK, or if a staff member gives permission</li>
+                    <li>No sirens, honking, or ramming into other vehicles</li>
+                    <li>All convoy roads must be fully blocked to prevent any external disturbance</li>
+                    <li>No civilian should drive in or around the convoy</li>
+                    <li>Maintain a speed between 15-30 mph, or 15-30 Km/h</li>
+                </ul>
+
+                <h2>Convoy Procedures</h2>
+                <p>During a convoy you should always make sure that a Peace Timer is active to prevent anyone from shooting at the convoy:</p>
+                <div class="command-box">
+                    <div class="command-label">Active Peace Timer</div>
+                    <pre>:pt 500</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':pt 500')">Copy</button>
+                </div>
+                <p>The President cannot be killed during a convoy. If the President's vehicle decides to drive off and away without staff consent, the President can then be killed, but you must stop the convoy immediately and teleport to his vehicle to get him back on track.</p>
+            </div>
+
+            <!-- ===== BORDER ROLEPLAY ===== -->
+            <div class="page" id="page-border-rp">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Roleplay Guidelines <span class="sep">/</span> Border Roleplay</div>
+                <h1>Border Roleplay</h1>
+
+                <div class="callout info">
+                    <span class="callout-icon">ℹ️</span>
+                    <div>
+                        <div class="callout-title">What is Border Roleplay?</div>
+                        <p><strong>Border Roleplay</strong> (often abbreviated as Border RP), is a type of Roleplay which involves roleplaying a border within two spaces, with controls on vehicles, peoples and goods passing between the two spaces, hence involving the participation of both LEOs and normal players.</p>
+                        <p>Border Roleplay is not our primary roleplay for our staff members to host, you only host this if there is a lack of staff or a lack of people in game to host a presidential roleplay.</p>
+                    </div>
+                </div>
+
+                <h2>Role Information</h2>
+                <p>There isn't really a need for an host or any other type of role, all staff members on-duty should help out by monitoring the border area, ensuring there is no rule breakers, making frequent announcements about the location of the border and, finally, taking mod calls that show up.</p>
+
+                <h2>Allowed Locations</h2>
+                <ul>
+                    <li>High Rock Park (Main Entrance)</li>
+                    <li>Highways</li>
+                </ul>
+
+                <h2>Useful Announcements</h2>
+                <div class="command-box">
+                    <div class="command-label">Announcement — When RP Changes to Border</div>
+                    <pre>:m The roleplay has been changed to border at [Location].</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':m The roleplay has been changed to border at [Location].')">Copy</button>
+                </div>
+                <p><em>If DOT is needed, add: "DOT is needed to help setup the border."</em></p>
+                <div class="command-box">
+                    <div class="command-label">Announcement — Every 1–5 Minutes</div>
+                    <pre>:h Welcome to SCPERLC, the current roleplay is Border and it is located at [location].</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':h Welcome to SCPERLC, the current roleplay is Border and it is located at [location].')">Copy</button>
+                </div>
+                <div class="command-box">
+                    <div class="command-label">Announcement — Every ~10 Minutes or During Chaos</div>
+                    <pre>:h Friendly reminder, random shooting or killing is not allowed at the border.</pre>
+                    <button class="copy-btn" onclick="copyCommand(this, ':h Friendly reminder, random shooting or killing is not allowed at the border.')">Copy</button>
+                </div>
+
+                <h2>Roleplay Rules</h2>
+                <ul>
+                    <li>Civilians must stop at the check points and follow the police's instructions</li>
+                    <li>All sirens are prohibited</li>
+                    <li>Ramming is prohibited</li>
+                    <li>RDM, or more generally, random shooting is not allowed at the border area</li>
+                    <li>It is allowed for civilians to start a motivated fight with the police at the border</li>
+                </ul>
+            </div>
+
+            <!-- ===== BORDER START PROCEDURE ===== -->
+            <div class="page" id="page-border-start">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Roleplay Guidelines <span class="sep">/</span> Border Roleplay <span class="sep">/</span> Start Procedure</div>
+                <h1>Border Roleplay Start Procedure</h1>
+
+                <div class="callout info">
+                    <span class="callout-icon">ℹ️</span>
+                    <div>
+                        <div class="callout-title">Note</div>
+                        <p>If you already know the basics, skip to this page to learn how to start a Border RP.</p>
+                    </div>
+                </div>
+
+                <h2>How to Start a Border RP</h2>
+                <ol>
+                    <li><strong>Select a location</strong> — Choose from the allowed locations (High Rock Park Main Entrance or Highways)</li>
+                    <li><strong>Set up the border</strong> — Use DOT workers to set up the border, or have HR+ members load in one of the layouts (HR+ members only, as they have admin commands). If no HR+ is online, ask DOT members to set up the border or request a SHR+ member to use API commands to load the layout.</li>
+                    <li><strong>Set up checkpoints</strong> — Create 2 checkpoints (one for each direction of the road), including spaces for:
+                        <ul>
+                            <li>ID check checkpoint for officers</li>
+                            <li>Vehicle search area</li>
+                            <li>Parking area for staff and service cars (kept clean and out of the way)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Announce the RP start</strong> — Use the following command to notify all players (replace [Location] with the actual location):
+                        <div class="command-box">
+                            <div class="command-label">Border RP Announcement</div>
+                            <pre>:m The roleplay has been changed to border at [Location].</pre>
+                            <button class="copy-btn" onclick="copyCommand(this, ':m The roleplay has been changed to border at [Location].')">Copy</button>
+                        </div>
+                        <p><em>Important:</em> Limit yourself to one M announcement per RP change to avoid frequent UI messages. If players don't show up, use H-type announcements first, and only use M announcements again if no one shows up after several attempts.</p>
+                    </li>
+                    <li><strong>Handle the RP</strong> — As a staff member, your main job is to ensure everyone follows the rules. Typical procedure involves players crossing the border and getting their vehicle and personal data inspected by police staff present at the border.</li>
+                </ol>
+
+                <div class="callout warning">
+                    <span class="callout-icon">⚠️</span>
+                    <div>
+                        <div class="callout-title">Note</div>
+                        <p>You can use the "copy" button on the command boxes to directly copy and paste the command in-game.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== ZOMBIE ROLEPLAY ===== -->
+            <div class="page" id="page-zombie-rp">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Roleplay Guidelines <span class="sep">/</span> Zombie Roleplay</div>
+                <h1>Zombie Roleplay</h1>
+
+                <p>Zombie roleplay is one of our most popular roleplay scenarios! It involves surviving a zombie apocalypse, managing resources, and working together to stay alive.</p>
+
+                <div class="callout info">
+                    <span class="callout-icon">🧟</span>
+                    <div>
+                        <div class="callout-title">About Zombie RP</div>
+                        <p>Zombie roleplay simulates a post-apocalyptic world overrun by zombies. Players must scavenge for supplies, build shelters, and survive against the undead horde.</p>
+                    </div>
+                </div>
+
+                <h2>Key Elements</h2>
+                <ul>
+                    <li><strong>Survival</strong> — Eliminate zombies (civilians)</li>
+                    <li><strong>Defenses</strong> — The police team can set up defenses to reduce the chances of being infected</li>
+                    <li><strong>Coordination</strong> — Teamwork can prevent the zombies from overrunning the police</li>
+                </ul>
+
+                <h2>Staff Roles in Zombie RP</h2>
+                <ul>
+                    <li><strong>Event Coordinators</strong> — Set up and manage zombie events</li>
+                    <li><strong>Zone Moderators</strong> — Ensure fair gameplay in different zones</li>
+                </ul>
+                <p><strong>Staff Responsibility:</strong> Staff members are expected to <strong>monitor the injuring of officers and the weapons that zombies use</strong> to ensure that only knives and punches are being used against police staff, maintaining fairness and integrity in the roleplay.</p>
+
+                <h2>Rules for Zombie RP</h2>
+                <div class="callout warning">
+                    <div>
+                        <div class="callout-title">Infected Police</div>
+                        <p>If players on the <strong>Police Team</strong> are <strong>injured/damaged by a civilian</strong>, they <strong>must switch to the civilian side and attack the Police Team as zombies</strong>. This is a mandatory rule to maintain the integrity of the zombie roleplay scenario.</p>
+                    </div>
+                </div>
+
+                <div class="callout warning">
+                    <div>
+                        <div class="callout-title">Civilian Attack Restrictions</div>
+                        <p><strong>Civilians must only use knives or punches</strong> to injure officers during zombie roleplay. No firearms, explosives, or other weapons are permitted when targeting police staff.</p>
+                    </div>
+                </div>
+
+                <div class="callout info">
+                    <div>
+                        <div class="callout-title">Zombie Appearance</div>
+                        <p><strong>Recommended:</strong> All civilians playing as zombies should use a <strong>green skintone</strong> to clearly identify themselves as undead participants in the roleplay.</p>
+                    </div>
+                </div>
+
+                <div class="callout info">
+                    <div>
+                        <div class="callout-title">Police Team Status</div>
+                        <p><strong>Important:</strong> The police team will be considered <strong>non-infected</strong> during zombie roleplay. They are not part of the undead horde and should be clearly distinguishable from zombies.</p>
+                    </div>
+                </div>
+
+                <h2>Tips for Staff</h2>
+                <ul>
+                    <li><strong>Clear the way</strong> — Staff must keep pathways clear between the two teams, or they might get caught in the crossfire</li>
+                    <li><strong>Handle modcalls</strong> — Be prepared to respond to moderation calls during the roleplay</li>
+                </ul>
+
+                <div class="callout info">
+                    <div>
+                        <div class="callout-title">Player Briefing</div>
+                        <p><strong>Staff should also inform players of the key elements</strong> (Survival, Defenses, and Coordination) before the roleplay begins to ensure everyone understands the scenario and objectives.</p>
+                    </div>
+                </div>
+
+                <div class="callout info">
+                    <div>
+                        <div class="callout-title">Note</div>
+                        <p>This is meant to be a semi-chaotic RP. You are expected to monitor and let the events play out.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== NORMAL ROLEPLAY ===== -->
+            <div class="page" id="page-normal-rp">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Roleplay Guidelines <span class="sep">/</span> Normal Roleplay</div>
+                <h1>Normal Roleplay</h1>
+
+                <div class="callout danger">
+                    <span class="callout-icon">⛔</span>
+                    <div>
+                        <div class="callout-title">Important Warning</div>
+                        <p><strong>Normal Roleplay should almost never be used.</strong> It is considered a <strong>last resort</strong> and should only be hosted when <strong>all available staff members are absent</strong> and there is no other option. Our server's primary focus is on structured roleplay events (President RP, SCP RP, Border RP, Zombie RP). Do not host Normal Roleplay if any staff members are available to host a specialized RP instead.</p>
+                    </div>
+                </div>
+
+                <h2>General Roleplay Guidelines</h2>
+                <p>Normal roleplay is the day-to-day roleplay that occurs in our community. Here are the key guidelines:</p>
+
+                <h3>Basic Rules</h3>
+                <ul>
+                    <li>Stay in character at all times</li>
+                    <li>Do not break character unnecessarily</li>
+                    <li>Respect other players' roleplay</li>
+                    <li>Do not force roleplay on unwilling players</li>
+                </ul>
+
+                <h3>Accepted Roleplay Types</h3>
+                <ul>
+                    <li>Business and commerce</li>
+                    <li>Law enforcement and emergency services</li>
+                    <li>Government and politics</li>
+                    <li>Medical and healthcare</li>
+                    <li>Civilian life scenarios</li>
+                </ul>
+
+                <h3>Prohibited Roleplay</h3>
+                <ul>
+                    <li>NSFW (Not Safe For Work) content</li>
+                    <li>Banned roleplay (bomb, torture, etc.)</li>
+                    <li>Extremism or racism</li>
+                    <li>Exploitation or abuse roleplay</li>
+                </ul>
+
+                <div class="callout warning">
+                    <span class="callout-icon">⚠️</span>
+                    <div>
+                        <div class="callout-title">Remember</div>
+                        <p>All roleplay must comply with Roblox Platform Terms of Service and server rules.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== CHAIN OF COMMAND ===== -->
+            <div class="page" id="page-chain-of-command">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Additional Information <span class="sep">/</span> Chain of Command</div>
+                <h1>Official Chain of Command</h1>
+
+                <div class="callout info">
+                    <span class="callout-icon">📌</span>
+                    <div>
+                        <div class="callout-title">Staff Handbook Reference</div>
+                        <p>This is the official chain of command for SCP Roleplay. All staff members must understand their position within this hierarchy.</p>
+                    </div>
+                </div>
+
+                <!-- ===== OWNERSHIP ===== -->
+                <h2>Ownership</h2>
+                <div class="rank-grid">
+                    <div class="rank-card">
+                        <div class="rank-badge" style="background: linear-gradient(135deg, #dc2626, #ef4444);">✨</div>
+                        <div class="rank-name">Director</div>
+                        <div class="rank-desc">Server owner and final authority on all matters.</div>
+                    </div>
+                </div>
+
+                <!-- ===== LEADERSHIP ===== -->
+                <h2>Leadership</h2>
+                <div class="rank-grid">
+                    <div class="rank-card">
+                        <div class="rank-badge" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">🌟</div>
+                        <div class="rank-name">Assistant Director</div>
+                        <div class="rank-desc">Second in command and co-owner — acts on behalf of the Director when needed.</div>
+                    </div>
+                    <div class="rank-card">
+                        <div class="rank-badge" style="background: linear-gradient(135deg, #06b6d4, #22d3ee);">📢</div>
+                        <div class="rank-name">Community Manager</div>
+                        <div class="rank-desc">Hosts community-wide events and drives server activity and engagement.</div>
+                    </div>
+                    <div class="rank-card">
+                        <div class="rank-badge" style="background: linear-gradient(135deg, #0891b2, #22d3ee);">🏛️</div>
+                        <div class="rank-name">Board Of Executives</div>
+                        <div class="rank-desc">A specialized team with voting rights on server direction. They influence major decisions but do not directly manage staff operations.</div>
+                    </div>
+                </div>
+
+                <!-- ===== HIGH RANKING ===== -->
+                <h2>High Ranking</h2>
+                <div class="rank-grid">
+                    <div class="rank-card">
+                        <div class="rank-badge" style="background: linear-gradient(135deg, #0891b2, #06b6d4);">📊</div>
+                        <div class="rank-name">Senior Management</div>
+                        <div class="rank-desc">Highest rank — oversees the majority of staff operations.</div>
+                    </div>
+                    <div class="rank-card">
+                        <div class="rank-badge" style="background: linear-gradient(135deg, #059669, #34d399);">📝</div>
+                        <div class="rank-name">Junior Management</div>
+                        <div class="rank-desc">Trainee for Management position.</div>
+                    </div>
+                    <div class="rank-card">
+                        <div class="rank-badge" style="background: linear-gradient(135deg, #2563eb, #60a5fa);">🔍</div>
+                        <div class="rank-name">Senior Supervisory</div>
+                        <div class="rank-desc">Exemplary staff — oversees operations.</div>
+                    </div>
+                    <div class="rank-card">
+                        <div class="rank-badge" style="background: linear-gradient(135deg, #0891b2, #67e8f9);">📋</div>
+                        <div class="rank-name">Junior Supervisory</div>
+                        <div class="rank-desc">Supporting supervisory role.</div>
+                    </div>
+                    <div class="rank-card">
+                        <div class="rank-badge" style="background: linear-gradient(135deg, #6b7280, #9ca3af);">📄</div>
+                        <div class="rank-name">Intern Supervisory</div>
+                        <div class="rank-desc">Entry-level supervisory position.</div>
+                    </div>
+                    <div class="rank-card">
+                        <div class="rank-badge" style="background: linear-gradient(135deg, #0e7490, #22d3ee);">🛡️</div>
+                        <div class="rank-name">Senior Moderation</div>
+                        <div class="rank-desc">Experienced moderators with expanded responsibilities.</div>
+                    </div>
+                    <div class="rank-card">
+                        <div class="rank-badge" style="background: linear-gradient(135deg, #059669, #34d399);">🔧</div>
+                        <div class="rank-name">Junior Moderation</div>
+                        <div class="rank-desc">Entry-level moderation position.</div>
+                    </div>
+                </div>
+
+                <!-- ===== MODERATION DEPARTMENT ===== -->
+                <h2>Moderation Department</h2>
+                <div class="rank-grid">
+                    <div class="rank-card">
+                        <div class="rank-badge" style="background: linear-gradient(135deg, #0891b2, #22d3ee);">📋</div>
+                        <div class="rank-name">Trial Admin</div>
+                        <div class="rank-desc">Administrative role with oversight responsibilities.</div>
+                    </div>
+                    <div class="rank-card">
+                        <div class="rank-badge" style="background: linear-gradient(135deg, #06b6d4, #22d3ee);">🔧</div>
+                        <div class="rank-name">Development Team</div>
+                        <div class="rank-desc">Handles server development and technical issues.</div>
+                    </div>
+                    <div class="rank-card">
+                        <div class="rank-badge" style="background: linear-gradient(135deg, #06b6d4, #22d3ee);">🎨</div>
+                        <div class="rank-name">Technical Designer</div>
+                        <div class="rank-desc">Designs and implements server features and improvements.</div>
+                    </div>
+                    <div class="rank-card">
+                        <div class="rank-badge" style="background: linear-gradient(135deg, #059669, #34d399);">📋</div>
+                        <div class="rank-name">Trial Moderator</div>
+                        <div class="rank-desc">Trainee moderator position.</div>
+                    </div>
+                    <div class="rank-card">
+                        <div class="rank-badge" style="background: linear-gradient(135deg, #6b7280, #9ca3af);">📋</div>
+                        <div class="rank-name">In Training</div>
+                        <div class="rank-desc">A division bar designation for all staff members currently undergoing training before receiving their permanent rank.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== STAFF AWARDS ===== -->
+            <div class="page" id="page-staff-awards">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Additional Information <span class="sep">/</span> Staff Awards</div>
+                <h1>Staff Awards</h1>
+
+                <div class="callout success">
+                    <span class="callout-icon">🏆</span>
+                    <div>
+                        <div class="callout-title">Award Recognition</div>
+                        <p>Staff awards are given out to recognize outstanding contributions and dedication.</p>
+                    </div>
+                </div>
+
+                <h2>Staff of The Week (SOTW)</h2>
+                <div class="rank-card" style="background: var(--bg-card); border: 2px solid var(--primary); border-radius: var(--radius-md); padding: 20px; margin: 20px 0;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div style="font-size: 40px;">🏆</div>
+                        <div>
+                            <div style="font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 8px;">Staff of The Week (SOTW)</div>
+                            <p style="margin: 0; color: var(--text-secondary);">Awarded to a staff member who has demonstrated exceptional performance, dedication, and commitment during the week. This is our premier staff recognition award.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Nomination Process</h2>
+                <p><strong>SOTW is decided by the highest shift hours.</strong> HR will award the appropriate people based on their recorded shift time and performance.</p>
+            </div>
+
+            <!-- ===== ARBITER PASS ===== -->
+            <div class="page" id="page-arbiter-pass">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Additional Information <span class="sep">/</span> Arbiter Pass</div>
+                <h1>Arbiter Pass</h1>
+
+                <h2>What is an Arbiter Pass?</h2>
+                <p>An Arbiter Pass is a special permission that allows staff members to perform certain actions that require higher authority. It is typically granted to senior staff members.</p>
+
+                <h2>Requirements</h2>
+                <ul>
+                    <li>Minimum rank of Moderator</li>
+                    <li>Clean disciplinary record</li>
+                    <li>Recommendation from a superior</li>
+                    <li>Completion of additional training</li>
+                </ul>
+
+                <div class="callout danger">
+                    <span class="callout-icon">⛔</span>
+                    <div>
+                        <div class="callout-title">Important</div>
+                        <p><strong>You are not supposed to ask HR for an Arbiter Pass.</strong> It will be given to the approiate staff members when the situation requires it.</p>
+                    </div>
+                </div>
+
+                <h2>Privileges</h2>
+                <ul>
+                    <li>Access to advanced moderation commands</li>
+                    <li>Authority to make final decisions on disputes</li>
+                    <li>Ability to override certain punishments</li>
+                    <li>Access to confidential information</li>
+                </ul>
+
+                <div class="callout warning">
+                    <span class="callout-icon">⚠️</span>
+                    <div>
+                        <div class="callout-title">Important</div>
+                        <p>Abuse of the Arbiter Pass will result in immediate revocation and potential rank removal.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== IMPORTANT INFORMATION ===== -->
+            <div class="page" id="page-important-info">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Additional Information <span class="sep">/</span> Important Information</div>
+                <h1>Important Information</h1>
+
+                <p>Here you will find some important information that you should keep in mind when moderating. This page will be frequently updated with new information.</p>
+
+                <h2>General Reminders</h2>
+                <ul>
+                    <li>Always be fair and consistent</li>
+                    <li>Document all moderation actions</li>
+                    <li>Follow the chain of command</li>
+                    <li>Do not abuse your commands</li>
+                    <li>Maintain professionalism at all times</li>
+                </ul>
+
+                <h2>Communication</h2>
+                <ul>
+                    <li>Use appropriate commands for your rank</li>
+                    <li>Communicate clearly with players</li>
+                    <li>Keep staff channels updated</li>
+                    <li>Report issues to your superiors</li>
+                </ul>
+            </div>
+
+            <!-- ===== FAQ ===== -->
+            <div class="page" id="page-faq">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Additional Information <span class="sep">/</span> Frequently Asked Questions</div>
+                <h1>Frequently Asked Questions</h1>
+
+                <h2>Common Questions</h2>
+                <h3>How do I get promoted?</h3>
+                <p>Promotions are based on performance, shift hours, and recommendations from superiors. Consistent good behavior and dedication are key.</p>
+
+                <h3>What commands can I use?</h3>
+                <p>The commands available to you depend on your rank. See the Command Usage page for details on command letter requirements.</p>
+
+                <h3>How do I handle a specific situation?</h3>
+                <p>Refer to the Punishment Guide and Roleplay Guidelines for specific procedures. When in doubt, consult your superiors.</p>
+
+                <h3>What happens if I make a mistake?</h3>
+                <p>Mistakes happen. Report them to your superiors, learn from them, and move forward. The staff team is here to support you.</p>
+
+                <h3>What is SSD/SSU?</h3>
+                <p><strong>SSD</strong> stands for <strong>Server Start Up</strong> and <strong>SSU</strong> stands for <strong>Server Shutdown</strong>. These are commands used to restart or shut down the server. Only staff members with appropriate permissions (HR+ or higher) should use these commands, and they should be used responsibly during low-activity periods to minimize disruption to players.</p>
+            </div>
+
+            <!-- ===== GLOSSARY ===== -->
+            <div class="page" id="page-glossary">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Additional Information <span class="sep">/</span> Glossary</div>
+                <h1>Glossary</h1>
+
+                <h2>Punishment Guide Terms</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>RDM</strong></td><td>Random Death Match — Killing without roleplay justification</td></tr>
+                            <tr><td><strong>VDM</strong></td><td>Vehicle Death Match — Killing using a vehicle without roleplay justification</td></tr>
+                            <tr><td><strong>Fail RP (FRP)</strong></td><td>Failing to act in character or follow roleplay conventions</td></tr>
+                            <tr><td><strong>NITRP</strong></td><td>No Intent to Roleplay — Player shows no intention of participating in roleplay</td></tr>
+                            <tr><td><strong>Breaking Character</strong></td><td>Acting out of character or breaking immersion</td></tr>
+                            <tr><td><strong>Exploiting</strong></td><td>Hacking, flying, flinging, or using game bugs</td></tr>
+                            <tr><td><strong>Extremism</strong></td><td>Roleplaying or discussing extreme real-world tragedies</td></tr>
+                            <tr><td><strong>Racism</strong></td><td>Racist behaviour or usage of slurs</td></tr>
+                            <tr><td><strong>NSFW Actions</strong></td><td>Not Safe For Work content — Ro bang, NSFW roleplay</td></tr>
+                            <tr><td><strong>Banned Roleplay</strong></td><td>Bomb Roleplay, torture roleplay, or other banned scenarios</td></tr>
+                            <tr><td><strong>Bypassing</strong></td><td>Using alternate words to circumvent filters (e.g., "STFU", "SYBAU")</td></tr>
+                            <tr><td><strong>Max Punishments</strong></td><td>Reaching 10+ punishments on a single account</td></tr>
+                            <tr><td><strong>Leaving To Avoid Punishment</strong></td><td>Exiting the server to escape an active punishment</td></tr>
+                            <tr><td><strong>Joining Before Kick Timer Ends</strong></td><td>Rejoining the server before the kick timer expires</td></tr>
+                            <tr><td><strong>Using An Alt Account</strong></td><td>Using an alternate account to bypass restrictions</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Team Divisions — President Roleplay</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Host</strong></td><td>The primary staff member responsible for managing and supervising the President RP</td></tr>
+                            <tr><td><strong>Co-Host</strong></td><td>Secondary staff member who assists the host and takes over if needed</td></tr>
+                            <tr><td><strong>Supporters</strong></td><td>Staff assigned to side-tasks such as monitoring, answering player questions, and assisting with convoy</td></tr>
+                            <tr><td><strong>Moderation Subdivision</strong></td><td>Staff members who continue normal server moderation duties during the RP</td></tr>
+                            <tr><td><strong>President</strong></td><td>The main player character representing the President of the United States; has 3 lives</td></tr>
+                            <tr><td><strong>Vice-President</strong></td><td>The second-most elected player who replaces the President if they go offline</td></tr>
+                            <tr><td><strong>Guards</strong></td><td>Players who spontaneously choose to protect the President personally</td></tr>
+                            <tr><td><strong>LEOs</strong></td><td>Low Enforcement Officers — Police, Sheriffs, EMS, Fire Department, DOT participating in the RP</td></tr>
+                            <tr><td><strong>Civilians</strong></td><td>Players not in any official role; may spectate, attack, or roleplay peacefully</td></tr>
+                            <tr><td><strong>Convoy</strong></td><td>Organized group of vehicles moving with the President; must follow strict rules</td></tr>
+                            <tr><td><strong>Peace Timer (:pt)</strong></td><td>A command that prevents players from shooting for a set duration</td></tr>
+                            <tr><td><strong>Emergency Escape</strong></td><td>When the President escapes a location without a fully organized convoy (Host approval required)</td></tr>
+                            <tr><td><strong>Lives</strong></td><td>The President has 3 lives; each valid kill removes one life</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Team Divisions — SCP Roleplay</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Foundation</strong></td><td>The main organization in SCP RP, responsible for containing SCPs</td></tr>
+                            <tr><td><strong>Security Department</strong></td><td>First responders responsible for protecting the site</td></tr>
+                            <tr><td><strong>Scientific Department</strong></td><td>Researchers and scientists who perform tests on D-class</td></tr>
+                            <tr><td><strong>Medical Department</strong></td><td>Handles fire-medical safety, injuries, and basic medical/fire issues</td></tr>
+                            <tr><td><strong>Fire Suppression Department</strong></td><td>Assists with standard fires and fire-related safety</td></tr>
+                            <tr><td><strong>MTF</strong></td><td>Mobile Task Force — Highly specialized small teams (special forces)</td></tr>
+                            <tr><td><strong>MTF NU-7</strong></td><td>Armed with heavy machinery; matches a small army in real life</td></tr>
+                            <tr><td><strong>MTF BETA-7</strong></td><td>Specialized in containment of biohazardous breaches</td></tr>
+                            <tr><td><strong>MTF NTF-11</strong></td><td>Nine-Tailed-Fox — Specialized in containment of most SCPs</td></tr>
+                            <tr><td><strong>MTF Alpha-01</strong></td><td>Responsible for securing O5 council during a site breach</td></tr>
+                            <tr><td><strong>MTF ALPHA-09</strong></td><td>Designation "Last Hope" — The best of the best; utilizes SCPs in containment</td></tr>
+                            <tr><td><strong>CI (Chaos Insurgency)</strong></td><td>Former Foundation team that opposed them; <span style="color: #ef4444;">Hostile to Foundation</span></td></tr>
+                            <tr><td><strong>GOC (Global Occult Coalition)</strong></td><td>Neutral-based team that believes all SCPs should be destroyed; <span style="color: #ef4444;">Hostile to Foundation</span></td></tr>
+                            <tr><td><strong>Whitelisted Teams</strong></td><td>Private protection companies or other factions allowed to participate in RP</td></tr>
+                            <tr><td><strong>Site Lockdown</strong></td><td>A state where the facility is locked down during a containment breach</td></tr>
+                            <tr><td><strong>Containment Breach</strong></td><td>When SCPs escape their containment rooms</td></tr>
+                            <tr><td><strong>Evacuation Zone</strong></td><td>Designated safe areas for non-combatant units during a breach</td></tr>
+                            <tr><td><strong>Non-Combatant Units</strong></td><td>Staff not involved in active combat; report to evacuation zones during breaches</td></tr>
+                            <tr><td><strong>SCP Setup</strong></td><td>Preparation phase requiring 3–5+ staff/volunteers with SCP-themed avatars</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>General &amp; Moderation Terms</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>HR / HR+</strong></td><td>High Ranking — Senior staff members with elevated permissions</td></tr>
+                            <tr><td><strong>TM</strong></td><td>Trial Moderator — Entry-level moderation rank</td></tr>
+                            <tr><td><strong>LTAP</strong></td><td>Leave The Area Punishment — A moderation command</td></tr>
+                            <tr><td><strong>Ban Bolo</strong></td><td>A punishment log submitted via Melonly for ban-worthy actions</td></tr>
+                            <tr><td><strong>SPaG</strong></td><td>Spelling, Punctuation, and Grammar — Must be decent in punishment logs</td></tr>
+                            <tr><td><strong>LOA</strong></td><td>Leave of Absence — Staff can take 3 days to 2 weeks off</td></tr>
+                            <tr><td><strong>Melonly</strong></td><td>The server's required moderation service/tool</td></tr>
+                            <tr><td><strong>Arbiter Pass</strong></td><td>A special permission granted to appropriate staff when the situation requires it</td></tr>
+                            <tr><td><strong>Mod Call</strong></td><td>A player-reported issue that staff must respond to</td></tr>
+                            <tr><td><strong>RPD</strong></td><td>Police Department</td></tr>
+                            <tr><td><strong>FD</strong></td><td>Fire Department</td></tr>
+                            <tr><td><strong>Sheriff's Office</strong></td><td>Law enforcement agency in the server</td></tr>
+                            <tr><td><strong>DOT</strong></td><td>Department of Transportation — Handles infrastructure and convoy barriers</td></tr>
+                            <tr><td><strong>Safe Zone</strong></td><td>Areas where roleplay combat is not allowed</td></tr>
+                            <tr><td><strong>Black Livery</strong></td><td>Black vehicle paint job without writing; required for convoys</td></tr>
+                            <tr><td><strong>Decoy</strong></td><td>A secondary limousine used in convoys to confuse attackers</td></tr>
+                            <tr><td><strong>AFK</strong></td><td>Away From Keyboard — A player who is not actively playing</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ===== UPDATES ===== -->
+            <div class="page" id="page-updates">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Additional Information <span class="sep">/</span> Update Board</div>
+                <h1>Update Board</h1>
+
+                <p>This page will be updated with the latest server news, changes, and announcements. Check back regularly for important updates.</p>
+
+                <h2>Recent Updates</h2>
+                <ul>
+                    <li>Staff handbook created and distributed</li>
+                    <li>Updated punishment guidelines</li>
+                    <li>New roleplay scenarios added</li>
+                    <li>Server improvements and maintenance</li>
+                </ul>
+            </div>
+
+            <!-- ===== MELONLY USAGE ===== -->
+            <div class="page" id="page-melonly">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Technical Guides <span class="sep">/</span> Melonly Usage</div>
+                <h1>Melonly Usage</h1>
+
+                <div class="callout info">
+                    <span class="callout-icon">ℹ️</span>
+                    <div>
+                        <div class="callout-title">Melonly Information</div>
+                        <p>Our server uses Melonly as moderation service, therefore Melonly is a must: you are required to be in it and use it when going on duty. Here we will show how to join it, what it is, how to use it and such.</p>
+                        <p><strong>Leaking our Melonly invite will result in moderation action against anyone who is involved.</strong></p>
+                    </div>
+                </div>
+
+                <h2>Tips You Should Consider</h2>
+                <ul>
+                    <li><strong>Only HR+ can execute ban bolos.</strong> In the events you see a ban-worthy action, instead of waiting for a HR to ban them, kick the player and log a "Ban Bolo" on them using Melonly.</li>
+                    <li>When logging a punishment like LTAP, please make sure to also include what they did before they LTAPed, in the punishment's reason.</li>
+                    <li>When logging a warning, kick or a ban bolo, please take a second to see if you've typed the correct name in.</li>
+                    <li><strong>Please note, you must use decent SPaG in punishment logs</strong> as community members can see them! Not doing so will result in staff infractions.</li>
+                    <li>We do not require you to use high grammar in punishments, but make sure that sentences have a meaning, and that you are not using slang terms.</li>
+                </ul>
+
+                <h3>Examples</h3>
+                <div class="callout warning">
+                    <div>
+                        <div class="callout-title">Good Examples</div>
+                        <ul>
+                            <li>Usage of banned weapon</li>
+                            <li>He gonna insult me</li>
+                        </ul>
+                    </div>
+                </div>
+                <p>You can avoid putting punctuation at the end of the sentence and other minor things like this, though you must make sure that your sentence looks well-written.</p>
+
+                <h2>Leave of Absence (LOA)</h2>
+                <div class="callout danger">
+                    <span class="callout-icon">⚠️</span>
+                    <div>
+                        <div class="callout-title">LOA Rules</div>
+                        <p>Leave of Absence / LOA has a cooldown of <strong>2 weeks</strong>. You can't go on LOA for longer than 2 weeks, or less than 3 days.</p>
+                    </div>
+                </div>
+                <p><a href="https://melonly.com/panel/7496385569627312128" style="color: var(--link);" target="_blank">Request a LOA here</a></p>
+
+                <h2>API Command Restrictions</h2>
+                <div class="callout danger">
+                    <span class="callout-icon">⚠️</span>
+                    <div>
+                        <div class="callout-title">Important</div>
+                        <p>Only HRs and above are permitted to use API commands through Melonly. Using API commands while not being allowed to may result in a punishment even up to a termination!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== ROBLOX ID ===== -->
+            <div class="page" id="page-roblox-id">
+                <div class="breadcrumb"><a href="#" onclick="showPage('welcome')">🏠 Home</a> <span class="sep">/</span> Technical Guides <span class="sep">/</span> Get Roblox ID</div>
+                <h1>Get Roblox ID</h1>
+
+                <h2>How to Find a Player's Roblox ID</h2>
+                <p>There are plenty of ways to get a player's Roblox ID. Here's the easiest method:</p>
+
+                <h3>Using Their Profile Link</h3>
+                <p>If you have the player's Roblox profile link, you can extract their ID directly from the URL. A Roblox link looks something like this:</p>
+                <div class="command"><div class="command-header"><span class="command-icon">🔗</span><span>Example</span></div><code>https://www.roblox.com/users/2269104615/profile</code></div>
+                <p>The link is formed by various parts divided by slashes. The important part is <strong>[user's ID]</strong> — that number is the player's Roblox ID.</p>
+                <p>Note: You may see different formats (with or without country tags like `/it/`, with or without `/profile` at the end), but the ID number is always the same sequence of digits before `/profile` or at the end of the URL.</p>
+
+                <h3>How to Get a Player's Profile Link</h3>
+                <ul>
+                    <li><strong>Search their name</strong> in Roblox's search bar under the "People" section — the link will appear in your browser's address bar</li>
+                    <li><strong>Click on their profile name</strong> to open their profile page — the link will always be in your browser's address bar</li>
+                </ul>
+                <p><strong>TIP:</strong> If you're unsure, always paste the link in your browser and check if the displayed username is correct before using the ID.</p>
+
+                <h2>Why You Need It</h2>
+                <p>Knowing a player's Roblox ID is essential for moderation actions, punishment records, and communication.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // Toggle sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+            }
+        }
+
+        // Show page
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // Show selected page
+            const selectedPage = document.getElementById('page-' + pageId);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+            }
+
+            // Close sidebar on mobile
+            if (window.innerWidth <= 900) {
+                toggleSidebar();
+            }
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Toggle dropdown
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            dropdown.classList.toggle('open');
+        }
+
+        // Copy command to clipboard
+        function copyCommand(button, text) {
+            // Modern API with fallback
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(function() {
+                    showCopied(button);
+                }).catch(function(err) {
+                    console.error('Clipboard API failed, trying fallback:', err);
+                    copyFallback(button, text);
+                });
+            } else {
+                copyFallback(button, text);
+            }
+        }
+
+        function copyFallback(button, text) {
+            // Fallback for local files and older browsers
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-9999px';
+            textarea.style.top = '-999px';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showCopied(button);
+            } catch (err) {
+                console.error('Fallback copy failed:', err);
+                alert('Failed to copy. Please select the text and copy manually.');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function showCopied(button) {
+            var originalText = button.textContent;
+            button.textContent = 'Copied!';
+            button.style.background = '#10b981';
+            setTimeout(function() {
+                button.textContent = originalText;
+                button.style.background = '';
+            }, 2000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('welcome');
+        });
+    </script>
+</body>
+</html>
